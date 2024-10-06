@@ -4,8 +4,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Private Variables:<br>
- * {@link #accounts}: List&lt;Long, Account&gt;
+ * Private variables:<br>
+ * {@link #accounts}: {@code Map<Long, Account>}
  */
 public class Bank implements BankInterface {
     private final AtomicLong idGenerator = new AtomicLong(1);

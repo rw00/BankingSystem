@@ -3,16 +3,12 @@ package banking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SampleTest {
-    /**
-     * The bank/
-     */
     Bank bank;
     /**
      * The account number for Amelia Pond
@@ -32,7 +28,7 @@ public class SampleTest {
     Long hackerRank;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         bank = new Bank();
         Person person1ameliaPond = new Person("Amelia", "Pond", 1);
         Person person2roseTyler = new Person("Rose", "Tyler", 2);
@@ -45,7 +41,7 @@ public class SampleTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         bank = null;
         ameliaPond = null;
         roseTyler = null;
@@ -55,9 +51,15 @@ public class SampleTest {
 
     @Test
     public void invalidAccountNumberTest() {
-        assertEquals("1st and 2nd accounts were not assigned sequential account numbers.", ameliaPond + 1, (long) roseTyler);
-        assertEquals("2nd and 3rd accounts were not assigned sequential account numbers.", roseTyler + 1, (long) acmeCorp);
-        assertEquals("3rd and 4th accounts were not assigned sequential account numbers.", acmeCorp + 1, (long) hackerRank);
+        assertEquals("1st and 2nd accounts were not assigned sequential account numbers.",
+                     ameliaPond + 1,
+                     (long) roseTyler);
+        assertEquals("2nd and 3rd accounts were not assigned sequential account numbers.",
+                     roseTyler + 1,
+                     (long) acmeCorp);
+        assertEquals("3rd and 4th accounts were not assigned sequential account numbers.",
+                     acmeCorp + 1,
+                     (long) hackerRank);
 
         assertEquals(0.0, bank.getBalance(ameliaPond), 0);
         assertEquals(456.78, bank.getBalance(roseTyler), 0);
@@ -67,9 +69,6 @@ public class SampleTest {
         assertNotEquals(bank.getBalance(acmeCorp), bank.getBalance(hackerRank));
     }
 
-    /**
-     * Debit an account.
-     */
     @Test
     public void debitTest() {
         double amount = 20.0;
@@ -79,11 +78,8 @@ public class SampleTest {
         assertTrue("Account " + hackerRank + " should have sufficient funds.", bank.debit(hackerRank, amount));
     }
 
-    /**
-     * Test crediting accounts inside {@link Bank}.
-     */
     @Test
-    public void bankCreditTest() {
+    public void creditTest() {
         double amount = 23.45;
         double beforeDeposit1 = bank.getBalance(ameliaPond);
         double beforeDeposit2 = bank.getBalance(roseTyler);
@@ -99,22 +95,11 @@ public class SampleTest {
         assertEquals(beforeDeposit4 + amount, bank.getBalance(hackerRank), 0);
     }
 
-    /**
-     * Tests {@link Transaction}: an attempt to access an account with an invalid PIN must throw an
-     * Exception.
-     *
-     * @throws Exception Account validation failed.
-     */
     @Test(expected = Exception.class)
     public void invalidPinTransaction() throws Exception {
         new Transaction(bank, ameliaPond, 1234);
     }
 
-    /**
-     * Tests {@link Transaction}
-     *
-     * @throws Exception Account validation failed.
-     */
     @Test
     public void transactionTest() throws Exception {
         Transaction transaction1 = new Transaction(bank, ameliaPond, 1111);

@@ -4,7 +4,7 @@ package banking;
  * Abstract bank account class.<br>
  * <br>
  * <p>
- * Private Variables:<br>
+ * Private variables:<br>
  * {@link #accountHolder}: AccountHolder<br>
  * {@link #accountNumber}: Long<br>
  * {@link #pin}: int<br>
@@ -29,6 +29,11 @@ public abstract class Account implements AccountInterface {
     }
 
     @Override
+    public Long getAccountNumber() {
+        return accountNumber;
+    }
+
+    @Override
     public boolean validatePin(int attemptedPin) {
         return pin == attemptedPin;
     }
@@ -36,11 +41,6 @@ public abstract class Account implements AccountInterface {
     @Override
     public synchronized double getBalance() {
         return balance;
-    }
-
-    @Override
-    public Long getAccountNumber() {
-        return accountNumber;
     }
 
     @Override

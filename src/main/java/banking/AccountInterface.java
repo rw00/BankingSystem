@@ -1,14 +1,13 @@
 package banking;
 
 /**
- * The public methods for the {@link Account} class
+ * The public methods for the {@link Account} class.
  */
 public interface AccountInterface {
 
-    /**
-     * @return The {@link AccountHolder}.
-     */
     AccountHolder getAccountHolder();
+
+    Long getAccountNumber();
 
     /**
      * @param attemptedPin The attempted PIN.
@@ -16,15 +15,7 @@ public interface AccountInterface {
      */
     boolean validatePin(int attemptedPin);
 
-    /**
-     * @return {@link Account#balance}.
-     */
     double getBalance();
-
-    /**
-     * @return {@link Account#accountNumber}
-     */
-    Long getAccountNumber();
 
     /**
      * @param amount The amount to be deposited into the account.

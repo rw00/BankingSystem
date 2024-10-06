@@ -10,7 +10,5 @@ import org.junit.runners.Suite;
         HiddenTest.class,
         ConcurrentTest.class
 })
-
 public class UnitTestSuite {
-
 }

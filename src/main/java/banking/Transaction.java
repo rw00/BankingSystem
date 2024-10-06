@@ -1,9 +1,9 @@
 package banking;
 
 /**
- * Private Variables:<br>
+ * Private variables:<br>
  * {@link #accountNumber}: Long<br>
- * {@link #bank}: Bank<br>
+ * {@link #bank}: Bank
  */
 public class Transaction implements TransactionInterface {
     private final Long accountNumber;
@@ -13,7 +13,7 @@ public class Transaction implements TransactionInterface {
      * @param bank          The bank where the account is housed.
      * @param accountNumber The customer's account number.
      * @param attemptedPin  The PIN entered by the customer.
-     * @throws Exception Account validation failed.
+     * @throws Exception If account authentication fails.
      */
     public Transaction(Bank bank, Long accountNumber, int attemptedPin) throws Exception {
         this.bank = bank;

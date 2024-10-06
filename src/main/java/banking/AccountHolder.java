@@ -12,17 +12,18 @@ public abstract class AccountHolder {
         this.idNumber = idNumber;
     }
 
-    /**
-     * @return private int {@link AccountHolder#idNumber}
-     */
     public int getIdNumber() {
         return idNumber;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AccountHolder that = (AccountHolder) o;
         return idNumber == that.idNumber;
     }

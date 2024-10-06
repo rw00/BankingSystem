@@ -1,13 +1,12 @@
 package banking;
 
 /**
- * The public methods for the {@link Transaction} class
+ * The public methods for the {@link Transaction} class.
  */
 public interface TransactionInterface {
 
     /**
-     * @return The account balance for account {@link Transaction#accountNumber}
-     * .
+     * @return The balance for the account {@link Transaction#accountNumber}
      */
     double getBalance();
 
@@ -20,7 +19,7 @@ public interface TransactionInterface {
     /**
      * @param amount The amount to debit/withdraw from account
      *               {@link Transaction#accountNumber}
-     * @return true if amount could be withdrawn; otherwise, return false.
+     * @return true if amount could be withdrawn; otherwise, return false
      */
     boolean debit(double amount);
 }

@@ -17,6 +17,4 @@ public class Person extends AccountHolder {
     public String getLastName() {
         return lastName;
     }
-
-
 }

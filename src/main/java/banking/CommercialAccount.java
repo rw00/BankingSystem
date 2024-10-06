@@ -4,10 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Account implementation for commercial (business) customers.<br><br>
+ * Account implementation for commercial (business) customers.<br>
+ * <br>
  * <p>
- * Private Variables:<br>
- * {@link #authorizedUsers}: List&lt;Person&gt;<br>
+ * Private variables:<br>
+ * {@link #authorizedUsers}: {@code Set<Person>}
  */
 public class CommercialAccount extends Account {
     private final Set<Person> authorizedUsers = new HashSet<>();

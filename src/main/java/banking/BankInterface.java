@@ -6,7 +6,7 @@ package banking;
 public interface BankInterface {
 
     /**
-     * Creates a new account and adds it to {@link Bank#accounts}.
+     * Creates a new account and adds it to {@link Bank#accounts}
      *
      * @param company
      * @param pin
@@ -16,7 +16,7 @@ public interface BankInterface {
     Long openCommercialAccount(Company company, int pin, double startingDeposit);
 
     /**
-     * Creates a new account and adds it to {@link Bank#accounts}.
+     * Creates a new account and adds it to {@link Bank#accounts}
      *
      * @param person
      * @param pin
@@ -27,27 +27,27 @@ public interface BankInterface {
 
     /**
      * @param accountNumber The account number for the transaction.
-     * @param pin
+     * @param pin           The attempted PIN.
      * @return true if authentication was successful.
      */
     boolean authenticateUser(Long accountNumber, int pin);
 
     /**
      * @param accountNumber The account number for the transaction.
-     * @return the balance of the account.
+     * @return The balance of the account.
      */
     double getBalance(Long accountNumber);
 
     /**
      * @param accountNumber The account number for the transaction.
-     * @param amount        The amount of money being deposited.
+     * @param amount        The amount of money being credited.
      */
     void credit(Long accountNumber, double amount);
 
     /**
      * @param accountNumber The account number for the transaction.
-     * @param amount
-     * @return true if amount could be withdrawn; otherwise, return false.
+     * @param amount        The amount of money being debited.
+     * @return true if amount could be debited; otherwise, return false.
      */
     boolean debit(Long accountNumber, double amount);
 }

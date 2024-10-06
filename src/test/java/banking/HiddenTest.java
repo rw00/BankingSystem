@@ -3,57 +3,52 @@ package banking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class HiddenTest {
-    /**
-     * The bank/
-     */
     Bank bank;
     /**
-     * The account number for john.
+     * The account number for John.
      */
     Long john;
     /**
-     * The account number for julia
+     * The account number for Julia.
      */
     Long julia;
 
     /**
-     * The account number for daniel
+     * The account number for Daniel.
      */
     Long daniel;
     /**
-     * The account number for bob
+     * The account number for company Bob.
      */
     Long bob;
     /**
-     * The account number for smith
+     * The account number for company Smith.
      */
     Long smith;
 
-
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         bank = new Bank();
-        Person person1john = new Person("john", "kennedy", 1);
-        Person person2julia = new Person("julia", "singh", 2);
-        Person person3daniel = new Person("daniel", "radcliffe", 3);
-        Company company1bob = new Company("bob", 1);
-        Company company2smith = new Company("smith", 2);
-        john = bank.openConsumerAccount(person1john, 1111, 0.0);
-        julia = bank.openConsumerAccount(person2julia, 2222, 456.78);
-        daniel = bank.openConsumerAccount(person3daniel, 3333, 500.00);
-        bob = bank.openCommercialAccount(company1bob, 1111, 0.0);
-        smith = bank.openCommercialAccount(company2smith, 2222, 123456789.00);
+        Person person1John = new Person("john", "ken", 1);
+        Person person2Julia = new Person("julia", "chi", 2);
+        Person person3Daniel = new Person("daniel", "rad", 3);
+        Company company1Bob = new Company("bob", 1);
+        Company company2Smith = new Company("smith", 2);
+        john = bank.openConsumerAccount(person1John, 1111, 0.0);
+        julia = bank.openConsumerAccount(person2Julia, 2222, 456.78);
+        daniel = bank.openConsumerAccount(person3Daniel, 3333, 500.00);
+        bob = bank.openCommercialAccount(company1Bob, 1111, 0.0);
+        smith = bank.openCommercialAccount(company2Smith, 2222, 123456789.00);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         bank = null;
         john = null;
         julia = null;
@@ -79,9 +74,6 @@ public class HiddenTest {
         assertNotEquals(bank.getBalance(bob), bank.getBalance(smith));
     }
 
-    /**
-     * Debit an account.
-     */
     @Test
     public void debitTest() {
         double amount = 200.0;
@@ -92,11 +84,8 @@ public class HiddenTest {
         assertTrue("Account " + smith + " should have sufficient funds.", bank.debit(smith, amount));
     }
 
-    /**
-     * Test crediting accounts inside {@link Bank}.
-     */
     @Test
-    public void bankCreditTest() {
+    public void creditTest() {
         double amount = 500.00;
         double beforeDeposit1 = bank.getBalance(john);
         double beforeDeposit2 = bank.getBalance(julia);
@@ -115,30 +104,19 @@ public class HiddenTest {
         assertEquals(beforeDeposit5 + amount, bank.getBalance(smith), 0);
     }
 
-    /**
-     * Tests {@link Transaction}: an attempt to access an account with an invalid PIN must throw an
-     * Exception.
-     *
-     * @throws Exception Account validation failed.
-     */
     @Test(expected = Exception.class)
     public void invalidPinTransaction() throws Exception {
         new Transaction(bank, john, 9999);
     }
 
-    /**
-     * Tests {@link Transaction}
-     *
-     * @throws Exception Account validation failed.
-     */
     @Test
-    public void transactionTest() throws Exception {
+    public void transactionTest1() throws Exception {
         Transaction transaction1 = new Transaction(bank, daniel, 3333);
         double beforeDeposit1 = transaction1.getBalance();
         double amount = 1000000.23;
         transaction1.credit(amount);
         assertEquals(beforeDeposit1 + amount, transaction1.getBalance(), 0);
-        assertTrue("Debit was unsuccessful.", transaction1.debit(amount));
+        assertTrue("Debit was unexpectedly unsuccessful.", transaction1.debit(amount));
         assertFalse("This transaction should have overdrawn the account.", transaction1.debit(amount));
         assertEquals(beforeDeposit1, transaction1.getBalance(), 0);
         assertEquals(transaction1.getBalance(), bank.getBalance(daniel), 0);
@@ -147,12 +125,12 @@ public class HiddenTest {
     @Test
     public void transactionTest2() throws Exception {
         Transaction t2 = new Transaction(bank, john, 1111);
-        double beforeDeposit1 = t2.getBalance();
+        double beforeDeposit2 = t2.getBalance();
         double amount = 19239.34;
         t2.credit(amount);
-        assertEquals(beforeDeposit1 + amount, t2.getBalance(), 0);
-        assertTrue("Debit was unsuccessful.", t2.debit(amount));
-        assertEquals(beforeDeposit1, t2.getBalance(), 0);
+        assertEquals(beforeDeposit2 + amount, t2.getBalance(), 0);
+        assertTrue("Debit was unexpectedly unsuccessful.", t2.debit(amount));
+        assertEquals(beforeDeposit2, t2.getBalance(), 0);
         assertEquals(t2.getBalance(), bank.getBalance(john), 0);
     }
 }

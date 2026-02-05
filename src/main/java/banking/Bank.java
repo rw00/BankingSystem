@@ -62,4 +62,29 @@ public class Bank implements BankInterface {
     private Account getAccount(Long accountNumber) {
         return accounts.get(accountNumber);
     }
+
+    public boolean performTransfer(Long fromAccountNumber, Long toAccountNumber,int pin,  double amount){
+        Account fromAccount = accounts.get(fromAccountNumber);
+        Account toAccount = accounts.get(toAccountNumber);
+
+        if (fromAccount == null || toAccount == null) return false;
+        if (fromAccountNumber.equals(toAccountNumber)) return true;
+
+        Account first = fromAccountNumber  < toAccountNumber ? fromAccount:toAccount;
+        Account second = fromAccountNumber < toAccountNumber? toAccount: fromAccount;
+
+        synchronized (first){
+            synchronized (second){
+                if (!fromAccount.validatePin(pin)){
+                    return  false;
+                }
+                if (fromAccount.debitAccount(amount)){
+                    toAccount.creditAccount(amount);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
